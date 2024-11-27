@@ -174,11 +174,7 @@ void APP_Tasks ( void )
         }
     }
 }
- //timer 1 toutes 100ms
-void APP_Timer1Callback (void)
-{
-    APP_UpdateState(APP_STATE_SERVICE_TASKS);
-}
+//pour gestion état app.Data
 void APP_UpdateState(APP_STATES newState)
 {
     appData.state = newState;

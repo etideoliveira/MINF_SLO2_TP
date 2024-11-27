@@ -73,11 +73,12 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 
 void __ISR(_TIMER_1_VECTOR, ipl3AUTO) IntHandlerDrvTmrInstance0(void)
 {
+    //Pour init de 3 secondes
     static uint8_t compteur = 0;
     
     PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_1);
     
-    if(compteur == 29)
+    if(compteur == 29) //test si 3 secondes alors aller dans task
     {
         APP_UpdateState(APP_STATE_SERVICE_TASKS);
     }

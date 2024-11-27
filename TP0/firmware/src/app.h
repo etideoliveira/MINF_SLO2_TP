@@ -199,7 +199,6 @@ void APP_Initialize ( void );
     This routine must be called from SYS_Tasks() routine.
  */
 void APP_Tasks( void );
-void APP_Timer1Callback (void);
 void APP_UpdateState(APP_STATES NewState);
 
 #endif /* _APP_H */

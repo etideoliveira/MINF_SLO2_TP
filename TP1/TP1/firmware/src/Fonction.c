@@ -9,9 +9,9 @@
 #include "Mc32DriverLcd.h"
 #include "app.h"
 #include "bsp.h"
-#include "gestPWM.h"
+#include "Mc32DriverAdc.h"
 
-//APP_DATA appData;
+APP_DATA appData;
 
 /*Fonction Eteindre Leds
  Cette fonction éteint toutes les Leds
@@ -67,6 +67,5 @@ void Init(void)
             //init ADC
             BSP_InitADC10();
             //Leds
-            LedOff();
-            //GPWM_Initialize(S_pwmSettings *pData);
+            LedOff();;
 }

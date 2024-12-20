@@ -57,6 +57,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "bsp.h"
 #include "fonction.h"
 #include "gestPWM.h"
+
 // *****************************************************************************
 // *****************************************************************************
 // Section: Global Data Definitions
@@ -79,6 +80,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 */
 
 APP_DATA appData;
+S_pwmSettings PWMData;
 
 // *****************************************************************************
 // *****************************************************************************
@@ -144,16 +146,20 @@ void APP_Tasks ( void )
         case APP_STATE_INIT:
         {
             Init();
+            GPWM_Initialize(&PWMData);
             APP_UpdateState(APP_STATE_WAIT);
             break;
         }
            case APP_STATE_WAIT:
         {
+//            BSP_LEDOn(BSP_LED_0);
+//            BSP_LEDOn(BSP_LED_1);
+//            BSP_LEDOn(BSP_LED_2);
+//            BSP_LEDOn(BSP_LED_3);
             break;
         }
         case APP_STATE_SERVICE_TASKS:
         {
-            //AdcPot();
             APP_UpdateState(APP_STATE_WAIT);
             break;
         }

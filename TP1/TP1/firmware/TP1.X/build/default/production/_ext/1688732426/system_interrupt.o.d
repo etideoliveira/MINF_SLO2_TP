@@ -56,6 +56,9 @@ build/default/production/_ext/1688732426/system_interrupt.o: \
  ../../../../../../../../framework/peripheral/tmr/processor/../templates/tmr_TimerOperationMode_Default.h \
  ../src/system_config/default/system_definitions.h \
  ../../../../../../../../framework/system/common/sys_module.h \
+ ../../../../../../../../framework/driver/oc/drv_oc.h \
+ ../../../../../../../../framework/driver/driver_common.h \
+ ../src/system_config/default/framework/driver/oc/drv_oc_static.h \
  ../../../../../../../../framework/system/devcon/sys_devcon.h \
  ../../../../../../../../framework/system/system.h \
  ../../../../../../../../framework/system/clk/sys_clk.h \
@@ -138,13 +141,12 @@ build/default/production/_ext/1688732426/system_interrupt.o: \
  ../../../../../../../../framework/system/int/sys_int_mapping.h \
  ../src/system_config/default/framework/driver/tmr/drv_tmr_static.h \
  ../../../../../../../../framework/driver/tmr/drv_tmr.h \
- ../../../../../../../../framework/driver/driver_common.h \
  ../../../../../../../../framework/driver/tmr/tmr_definitions_pic32m.h \
  ../../../../../../../../framework/driver/tmr/drv_tmr_compatibility.h \
  ../../../../../../../../framework/system/ports/sys_ports.h \
  ../../../../../../../../framework/system/ports/sys_ports_definitions.h \
  ../../../../../../../../bsp/pic32mx_skes/Mc32DriverAdc.h \
- ../src/system_config/default/system_definitions.h
+ ../src/system_config/default/system_definitions.h ../src/gestPWM.h
 
 ../../../../../../../../framework/system/common/sys_common.h:
 
@@ -259,6 +261,12 @@ build/default/production/_ext/1688732426/system_interrupt.o: \
 ../src/system_config/default/system_definitions.h:
 
 ../../../../../../../../framework/system/common/sys_module.h:
+
+../../../../../../../../framework/driver/oc/drv_oc.h:
+
+../../../../../../../../framework/driver/driver_common.h:
+
+../src/system_config/default/framework/driver/oc/drv_oc_static.h:
 
 ../../../../../../../../framework/system/devcon/sys_devcon.h:
 
@@ -424,8 +432,6 @@ build/default/production/_ext/1688732426/system_interrupt.o: \
 
 ../../../../../../../../framework/driver/tmr/drv_tmr.h:
 
-../../../../../../../../framework/driver/driver_common.h:
-
 ../../../../../../../../framework/driver/tmr/tmr_definitions_pic32m.h:
 
 ../../../../../../../../framework/driver/tmr/drv_tmr_compatibility.h:
@@ -437,3 +443,5 @@ build/default/production/_ext/1688732426/system_interrupt.o: \
 ../../../../../../../../bsp/pic32mx_skes/Mc32DriverAdc.h:
 
 ../src/system_config/default/system_definitions.h:
+
+../src/gestPWM.h:

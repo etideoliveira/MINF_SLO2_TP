@@ -10,8 +10,8 @@
 #include "Mc32DriverAdc.h"
 #include "app.h"
 #include "bsp.h"
-
-APP_DATA appData;
+#include <stdint.h>
+#include <stdbool.h>
 
 /*Fonction Eteindre Leds
  Cette fonction éteint toutes les Leds
@@ -48,7 +48,7 @@ void LedOn(void)
 void Chenillard(void)
 {
     static uint8_t i = 0;
-    static uint8_t LedsOff = false;
+    static bool LedsOff = false;
     static uint8_t leds[] = {BSP_LED_0, BSP_LED_1, BSP_LED_2, BSP_LED_3,BSP_LED_4, BSP_LED_5, BSP_LED_6, BSP_LED_7};
     if(LedsOff == false)
     {
@@ -60,7 +60,7 @@ void Chenillard(void)
     i++;
     BSP_LEDOn(leds[i]);
     // test pour savoir si on est à la dernière led
-    if (i == 9)
+    if (i == HUIT)
     {
         i = 0;
     }
@@ -71,23 +71,24 @@ void Chenillard(void)
  */
 void AdcPot(void)
 {
-            appData.AdcRes = BSP_ReadAllADC();
-            //LCD printf
-            lcd_gotoxy(1,3);
-            printf_lcd("CH0 %4d CH1 %4d", appData.AdcRes.Chan0, appData.AdcRes.Chan1);
+    APP_DATA appData;
+    appData.AdcRes = BSP_ReadAllADC();
+    //LCD printf
+    lcd_gotoxy(1,3);
+    printf_lcd("CH0 %4d CH1 %4d", appData.AdcRes.Chan0, appData.AdcRes.Chan1);
 }
 /*Fonction initialisation de la carte 
  Cette fonction initialise le LCD et l'ADC */
 void Init(void)
 {
-            lcd_init();
-            lcd_bl_on();
-            lcd_gotoxy(1,1);
-            printf_lcd("Tp0 Led+AD 2024-2025");
-            lcd_gotoxy(1,2);
-            printf_lcd("De Oliveira Etienne");
-            //init ADC
-            BSP_InitADC10();
-            //Leds
-            LedOn();
+    lcd_init();
+    lcd_bl_on();
+    lcd_gotoxy(1,1);
+    printf_lcd("Tp0 Led+AD 2024-2025");
+    lcd_gotoxy(1,2);
+    printf_lcd("De Oliveira Etienne");
+    //init ADC
+    BSP_InitADC10();
+    //Leds
+    LedOn();
 }

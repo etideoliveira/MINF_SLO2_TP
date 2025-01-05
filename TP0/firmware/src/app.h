@@ -52,13 +52,8 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // *****************************************************************************
 // *****************************************************************************
 
-#include <stdint.h>
-#include <stdbool.h>
-#include <stddef.h>
-#include <stdlib.h>
-#include "system_config.h"
-#include "system_definitions.h"
 #include "Mc32DriverAdc.h"
+
 
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus  // Provide C++ Compatibility
@@ -73,7 +68,7 @@ extern "C" {
 // Section: Type Definitions
 // *****************************************************************************
 // *****************************************************************************
-
+#define TROISSECONDES 29
 // *****************************************************************************
 /* Application states
 
@@ -199,6 +194,8 @@ void APP_Initialize ( void );
     This routine must be called from SYS_Tasks() routine.
  */
 void APP_Tasks( void );
+
+//pour gestion état app.Data
 void APP_UpdateState(APP_STATES NewState);
 
 #endif /* _APP_H */

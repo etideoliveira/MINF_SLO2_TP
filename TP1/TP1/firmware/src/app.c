@@ -152,9 +152,11 @@ void APP_Tasks ( void )
         }
            case APP_STATE_WAIT:
         {
-//            BSP_LEDOn(BSP_LED_0);
-//            BSP_LEDOn(BSP_LED_1);
+            BSP_LEDOn(BSP_LED_0);
+            BSP_LEDOn(BSP_LED_1);
 //            BSP_LEDOn(BSP_LED_2);
+            
+            
 //            BSP_LEDOn(BSP_LED_3);
             break;
         }

@@ -72,6 +72,7 @@ void GPWM_GetSettings(S_pwmSettings *pData)
     // Calculer la vitesse signée variant de -99 à 99
     PWMData.SpeedSetting = scaledValue0 - 99;
 
+    
     // Calculer la vitesse absolue variant de 0 à +99
     if (scaledValue0 >= 99) 
     {
@@ -102,6 +103,7 @@ void GPWM_DispSettings(S_pwmSettings *pData)
 {
     lcd_ClearLine(1);
     lcd_ClearLine(2);
+    lcd_ClearLine(3);
     lcd_ClearLine(4);
     lcd_gotoxy(1,1);
     printf_lcd("TP1 PWM 2024-2025");
@@ -116,32 +118,34 @@ void GPWM_DispSettings(S_pwmSettings *pData)
 // Execution PWM et gestion moteur à partir des info dans structure
 void GPWM_ExecPWM(S_pwmSettings *pData)
 {
+    STBY_HBRIDGE_R = 1;
    // Gestion de la direction du pont en H
     if (PWMData.SpeedSetting > 0) 
     {
-        AIN1_HBRIDGE_R, STBY_HBRIDGE_R = 1;
+        AIN1_HBRIDGE_R = 1;
         AIN2_HBRIDGE_R = 0;
         // Avancer
-    } else if (PWMData.SpeedSetting < 0) 
+    } 
+    if (PWMData.SpeedSetting < 0) 
     {
-        AIN2_HBRIDGE_R, STBY_HBRIDGE_R = 1;
         AIN1_HBRIDGE_R = 0;
+        AIN2_HBRIDGE_R = 1;
          // Reculer
-    } else 
+    } 
+    else 
     {
-        STBY_HBRIDGE_R = 1;
         AIN1_HBRIDGE_R, AIN2_HBRIDGE_R = 0;
          // Arrêter
     }
 
     // Calcul de la valeur du nombre d'impulsions pour OC2
-    uint16_t oc2PulseWidth = (PWMData.absSpeed * 1023) / 99; // Calculer le rapport cyclique
+    uint16_t oc2PulseWidth = ((PWMData.absSpeed * 1023) / 99)*2; // Calculer le rapport cyclique
     PLIB_OC_PulseWidth16BitSet(OC_ID_2, oc2PulseWidth); // Appliquer la largeur d'impulsion à OC2
-    //PLIB_OC_PulseWidth16BitSet(2,oc2PulseWidth);
+    
     // Calcul de la valeur du nombre d'impulsions pour OC3
-    uint16_t oc3PulseWidth = (PWMData.absAngle + 90) * 1023 / 180; // Convertir l'angle signé en largeur d'impulsion
+    uint16_t oc3PulseWidth = ((PWMData.absAngle + 90) * 1023 / 180)*2; // Convertir l'angle signé en largeur d'impulsion
     PLIB_OC_PulseWidth16BitSet(OC_ID_3, oc3PulseWidth); // Appliquer la largeur d'impulsion à OC3
-   // PLIB_OC_PulseWidth16BitSet(3,oc3PulseWidth);
+   
 } 
 
 // Execution PWM software

@@ -79,11 +79,13 @@ void __ISR(_TIMER_1_VECTOR, ipl4AUTO) IntHandlerDrvTmrInstance0(void)
 {
     //Pour init de 3 secondes
     static uint8_t compteur = 0;
+    BSP_LEDOff(BSP_LED_0);
+    
     PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_1);
        if(compteur == 150) //test si 3 secondes alors aller dans task
     {
         APP_UpdateState(APP_STATE_SERVICE_TASKS);
-//        BSP_LEDOff(BSP_LED_0);
+        
         GPWM_GetSettings(&PWMData);
         GPWM_DispSettings(&PWMData);
         GPWM_ExecPWM(&PWMData);
@@ -92,6 +94,8 @@ void __ISR(_TIMER_1_VECTOR, ipl4AUTO) IntHandlerDrvTmrInstance0(void)
     {
         compteur++;
     }
+    BSP_LEDOn(BSP_LED_0);
+    
 }
 void __ISR(_TIMER_2_VECTOR, ipl1AUTO) IntHandlerDrvTmrInstance1(void)
 {
@@ -103,10 +107,11 @@ void __ISR(_TIMER_3_VECTOR, ipl1AUTO) IntHandlerDrvTmrInstance2(void)
     PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_3);
 //    BSP_LEDOff(BSP_LED_2);
 }
-void __ISR(_TIMER_4_VECTOR, ipl2AUTO) IntHandlerDrvTmrInstance3(void)
+void __ISR(_TIMER_4_VECTOR, ipl7AUTO) IntHandlerDrvTmrInstance3(void)
 {
+    BSP_LEDOff(BSP_LED_1);
     PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_4);
-//    BSP_LEDOff(BSP_LED_3);
+    BSP_LEDOn(BSP_LED_1);
 }
  /*******************************************************************************
  End of File

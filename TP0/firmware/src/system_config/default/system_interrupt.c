@@ -62,6 +62,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "system/common/sys_common.h"
 #include "app.h"
 #include "system_definitions.h"
+#include <stdint.h>
 
 // *****************************************************************************
 // *****************************************************************************
@@ -78,7 +79,7 @@ void __ISR(_TIMER_1_VECTOR, ipl3AUTO) IntHandlerDrvTmrInstance0(void)
     
     PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_1);
     
-    if(compteur == 29) //test si 3 secondes alors aller dans task
+    if(compteur == TROISSECONDES) //test si 3 secondes alors aller dans task
     {
         APP_UpdateState(APP_STATE_SERVICE_TASKS);
     }

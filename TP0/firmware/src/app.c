@@ -56,6 +56,12 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "app.h"
 #include "bsp.h"
 #include"fonction.h"
+#include "system_definitions.h"
+#include "Mc32DriverAdc.h"
+#include <stddef.h>
+#include <stdlib.h>
+#include "system_config.h"
+
 
 
 // *****************************************************************************

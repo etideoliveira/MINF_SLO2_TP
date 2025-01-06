@@ -11,12 +11,19 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-    #include "app.h"
+
 //Prototype des fonctions
+/*Fonction initialisation de la carte 
+ Cette fonction initialise le LCD et l'ADC */
 void Init(void);
+
+/*Fonction Allumer les Leds
+ Cette fonction allume toutes les Leds */
 void LedOn(void);
+
+/*Fonction Eteindre Leds
+ Cette fonction éteint toutes les Leds */
 void LedOff(void);
-void AdcPot(void);
 
 #ifdef __cplusplus
 }

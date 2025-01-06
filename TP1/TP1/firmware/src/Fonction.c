@@ -7,11 +7,9 @@
  */
 #include "fonction.h"
 #include "Mc32DriverLcd.h"
+#include "Mc32DriverAdc.h"
 #include "app.h"
 #include "bsp.h"
-#include "Mc32DriverAdc.h"
-
-APP_DATA appData;
 
 /*Fonction Eteindre Leds
  Cette fonction éteint toutes les Leds
@@ -43,17 +41,6 @@ void LedOn(void)
     LED7_W = 0;
 }
 
-/*Fonction ADC 
- Cette fonction lis l'ADC, pour obtenir la valeur des potentiomètres.
- Ensuite on affiche la valeur sur le LCD.
- */
-//void AdcPot(void)
-//{
-//            appData.AdcRes = BSP_ReadAllADC();
-//            //LCD printf
-//            lcd_gotoxy(1,3);
-//            printf_lcd("CH0 %4d CH1 %4d", appData.AdcRes.Chan0, appData.AdcRes.Chan1);
-//}
 /*Fonction initialisation de la carte 
  Cette fonction initialise le LCD et l'ADC */
 void Init(void)

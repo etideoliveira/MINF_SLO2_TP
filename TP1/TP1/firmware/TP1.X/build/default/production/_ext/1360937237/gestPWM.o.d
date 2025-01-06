@@ -139,15 +139,7 @@ build/default/production/_ext/1360937237/gestPWM.o: ../src/gestPWM.c \
  ../../../../../../../../framework/system/clk/sys_clk_compatibility.h \
  ../../../../../../../../framework/driver/tmr/drv_tmr_compatibility.h \
  ../../../../../../../../bsp/pic32mx_skes/Mc32DriverAdc.h ../src/app.h \
- ../src/system_config/default/system_definitions.h \
- ../../../../../../../../framework/driver/oc/drv_oc.h \
- ../src/system_config/default/framework/driver/oc/drv_oc_static.h \
- ../../../../../../../../framework/system/devcon/sys_devcon.h \
- ../../../../../../../../framework/system/system.h \
- ../src/system_config/default/framework/driver/tmr/drv_tmr_static.h \
- ../../../../../../../../framework/system/ports/sys_ports.h \
- ../../../../../../../../framework/system/ports/sys_ports_definitions.h \
- ../src/app.h ../../../../../../../../bsp/pic32mx_skes/Mc32DriverLcd.h \
+ ../../../../../../../../bsp/pic32mx_skes/Mc32DriverLcd.h \
  C:\microchip\harmony\v2_06\framework\peripheral\oc\processor\oc_p32mx795f512l.h \
  C:\microchip\harmony\v2_06\framework\peripheral\oc\processor\../templates/oc_EnableControl_Default.h \
  C:\microchip\harmony\v2_06\framework\peripheral\oc\processor\../templates/oc_Registers.h \
@@ -441,24 +433,6 @@ build/default/production/_ext/1360937237/gestPWM.o: ../src/gestPWM.c \
 ../../../../../../../../framework/driver/tmr/drv_tmr_compatibility.h:
 
 ../../../../../../../../bsp/pic32mx_skes/Mc32DriverAdc.h:
-
-../src/app.h:
-
-../src/system_config/default/system_definitions.h:
-
-../../../../../../../../framework/driver/oc/drv_oc.h:
-
-../src/system_config/default/framework/driver/oc/drv_oc_static.h:
-
-../../../../../../../../framework/system/devcon/sys_devcon.h:
-
-../../../../../../../../framework/system/system.h:
-
-../src/system_config/default/framework/driver/tmr/drv_tmr_static.h:
-
-../../../../../../../../framework/system/ports/sys_ports.h:
-
-../../../../../../../../framework/system/ports/sys_ports_definitions.h:
 
 ../src/app.h:
 

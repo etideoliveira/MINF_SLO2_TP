@@ -61,7 +61,6 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include <stdlib.h>
 #include "system_config.h"
 #include "gestPWM.h"
-
 // *****************************************************************************
 // *****************************************************************************
 // Section: Global Data Definitions
@@ -156,12 +155,6 @@ void APP_Tasks ( void )
         }
            case APP_STATE_WAIT:
         {
-            BSP_LEDOn(BSP_LED_0);
-            BSP_LEDOn(BSP_LED_1);
-//            BSP_LEDOn(BSP_LED_2);
-            
-            
-//            BSP_LEDOn(BSP_LED_3);
             break;
         }
         case APP_STATE_SERVICE_TASKS:

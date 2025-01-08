@@ -11,7 +11,9 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
+    
+#define ZERO 0
+#define UN 1
 //Prototype des fonctions
 /*Fonction initialisation de la carte 
  Cette fonction initialise le LCD et l'ADC */

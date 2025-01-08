@@ -20,6 +20,17 @@
 /*--------------------------------------------------------*/
 // Définition des fonctions prototypes
 /*--------------------------------------------------------*/
+#define ZERO 0
+#define UN 1
+#define DEUX 2
+#define DIX 10
+#define PWM_PERIOD_CYCLES 100 // 3.5 ms / 35 µs
+#define ORDONEEPRG 198
+#define OFFSETORIG 99
+#define MAXVALAD 1023
+#define DIVISION 100
+#define ANGLE_ABS 180
+#define MAXANGLE 90
 
 
 typedef struct {

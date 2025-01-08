@@ -152,7 +152,8 @@ build/default/production/_ext/1360937237/gestPWM.o: ../src/gestPWM.c \
  C:\microchip\harmony\v2_06\framework\peripheral\oc\processor\../templates/oc_BufferValue_32Bit_Variant.h \
  C:\microchip\harmony\v2_06\framework\peripheral\oc\processor\../templates/oc_PulseWidth_32Bit_Variant.h \
  C:\microchip\harmony\v2_06\framework\peripheral\oc\processor\../templates/oc_BufferSize_Default.h \
- C:\microchip\harmony\v2_06\framework\peripheral\oc\processor\../templates/oc_CompareModeSelect_Default.h
+ C:\microchip\harmony\v2_06\framework\peripheral\oc\processor\../templates/oc_CompareModeSelect_Default.h \
+ ../src/system_config/default/framework/driver/oc/drv_oc_static.h
 
 ../src/gestPWM.h:
 
@@ -463,3 +464,5 @@ C:\microchip\harmony\v2_06\framework\peripheral\oc\processor\../templates/oc_Pul
 C:\microchip\harmony\v2_06\framework\peripheral\oc\processor\../templates/oc_BufferSize_Default.h:
 
 C:\microchip\harmony\v2_06\framework\peripheral\oc\processor\../templates/oc_CompareModeSelect_Default.h:
+
+../src/system_config/default/framework/driver/oc/drv_oc_static.h:

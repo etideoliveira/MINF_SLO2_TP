@@ -2,12 +2,12 @@
 // GestPWM.c
 /*--------------------------------------------------------*/
 //	Description :	Gestion des PWM 
-//			        pour TP1 2016-2017
+//			        pour TP1 2024-2025
 //
-//	Auteur 		: 	C. HUBER
+//	Auteur 		: 	Etienne De Oliveira
 //
 //	Version		:	V1.1
-//	Compilateur	:	XC32 V1.42 + Harmony 1.08
+//	Compilateur	:	XC32 V1.5 + Harmony 5.5
 //
 /*--------------------------------------------------------*/
 
@@ -22,19 +22,22 @@
 #include "driver/oc/drv_oc_static.h"
 
 
-APP_DATA appData;
-S_pwmSettings PWMData;      // pour les settings
+APP_DATA appData; // Déclaration d'une structure pour stocker les données de l'application
+S_pwmSettings PWMData; // Déclaration d'une structure pour stocker les paramètres PWM
 
+// Fonction d'initialisation du PWM
 void GPWM_Initialize(S_pwmSettings *pData)
 {
-   // Init les data 
-    PWMData.absSpeed = ZERO;
-    PWMData.absAngle = ZERO;
-    PWMData.SpeedSetting = ZERO;
-    PWMData.AngleSetting = ZERO;
-   // Init état du pont en H
+   // Initialisation des paramètres de vitesse et d'angle à zéro
+    PWMData.absSpeed = ZERO; // Vitesse absolue
+    PWMData.absAngle = ZERO; // Angle absolu
+    PWMData.SpeedSetting = ZERO; // Réglage de la vitesse
+    PWMData.AngleSetting = ZERO; // Réglage de l'angle
+
+   // Activation du pont en H pour contrôler le moteur
     BSP_EnableHbrige();
-   // lance les timers et OC
+
+   // Démarrage des timers et des sorties de comparaison pour le PWM
     DRV_TMR0_Start();
     DRV_TMR1_Start();
     DRV_TMR2_Start();
@@ -43,56 +46,58 @@ void GPWM_Initialize(S_pwmSettings *pData)
     DRV_OC1_Start();
 }
 
-// Obtention vitesse et angle (mise a jour des 4 champs de la structure)
+// Fonction pour obtenir les réglages de vitesse et d'angle
 void GPWM_GetSettings(S_pwmSettings *pData)	
 {
-    // Variables  pour le canal 0
-    static uint16_t adcValues0[10]; // Tableau pour stocker les valeurs ADC du canal 0
-    static uint8_t index0 = ZERO; // Index pour le tableau du canal 0
-    static uint16_t sum0 = ZERO; // Somme des valeurs pour la moyenne du canal 0
+    // Déclaration de variables pour le canal 0
+    static uint16_t adcValues0[10];    // Tableau pour stocker les valeurs ADC du canal 0
+    static uint8_t index0 = ZERO;      // Index pour le tableau du canal 0
+    static uint16_t sum0 = ZERO;       // Somme des valeurs pour calculer la moyenne du canal 0
     static uint16_t lastValue0 = ZERO; // Dernière valeur lue du canal 0
-    // Variables  pour le canal 1
-    static uint16_t adcValues1[10]; // Tableau pour stocker les valeurs ADC du canal 1
-    static uint8_t index1 = ZERO; // Index pour le tableau du canal 1
-    static uint16_t sum1 = ZERO; // Somme des valeurs pour la moyenne du canal 1
-    static uint16_t lastValue1 = ZERO; // Dernière valeur lue du canal 1
-    // Lecture du convertisseur AD
-    appData.AdcRes = BSP_ReadAllADC();
-    lastValue0 = appData.AdcRes.Chan0;
-    sum0 -= adcValues0[index0];
-    adcValues0[index0] = lastValue0;
-    sum0 += adcValues0[index0];
-    index0 = (index0 + UN) % DIX;
-    uint16_t averageValue0 = sum0 / DIX;
 
-    // Calculer la valeur variant de 0 à 198
+    // Déclaration de variables pour le canal 1
+    static uint16_t adcValues1[10];    // Tableau pour stocker les valeurs ADC du canal 1
+    static uint8_t index1 = ZERO;      // Index pour le tableau du canal 1
+    static uint16_t sum1 = ZERO;       // Somme des valeurs pour calculer la moyenne du canal 1
+    static uint16_t lastValue1 = ZERO; // Dernière valeur lue du canal 1
+
+    // Lecture des valeurs du convertisseur analogique-numérique (ADC)
+    appData.AdcRes = BSP_ReadAllADC();   // Récupération des valeurs ADC
+    lastValue0 = appData.AdcRes.Chan0;   // Stockage de la dernière valeur du canal 0
+    sum0 -= adcValues0[index0];          // Soustraction de la valeur précédente du tableau
+    adcValues0[index0] = lastValue0;     // Stockage de la nouvelle valeur dans le tableau
+    sum0 += adcValues0[index0];          // Ajout de la nouvelle valeur à la somme
+    index0 = (index0 + UN) % DIX;        // Mise à jour de l'index pour le tableau
+    uint16_t averageValue0 = sum0 / DIX; // Calcul de la moyenne des valeurs du canal 0
+
+    // Mise à l'échelle de la valeur pour obtenir une plage de 0 à 198
     uint16_t scaledValue0 = (averageValue0 * ORDONEEPRG) / MAXVALAD;
 
-    // Calculer la vitesse signée variant de -99 à 99
+    // Calcul de la vitesse signée variant de -99 à 99
     PWMData.SpeedSetting = scaledValue0 - OFFSETORIG;
 
-    
-    // Calculer la vitesse absolue variant de 0 à +99
+    // Calcul de la vitesse absolue variant de 0 à +99
     if (scaledValue0 >= OFFSETORIG) 
     {
-        PWMData.absSpeed = PWMData.SpeedSetting ;
-    } else 
+        PWMData.absSpeed = PWMData.SpeedSetting; // Vitesse positive
+    } 
+    else 
     {
-        PWMData.absSpeed = abs(PWMData.SpeedSetting);
+        PWMData.absSpeed = abs(PWMData.SpeedSetting); // Vitesse négative
     }
     
-    // Traitement pour le 2ème AD (canal 1)
-    lastValue1 = appData.AdcRes.Chan1;
-    sum1 -= adcValues1[index1];
-    adcValues1[index1] = lastValue1;
-    sum1 += adcValues1[index1];
-    index1 = (index1 + UN) % DIX;
-    uint16_t averageValue1 = sum1 / DIX;
+    // Traitement pour le canal 1
+    lastValue1 = appData.AdcRes.Chan1;   // Stockage de la dernière valeur du canal 1
+    sum1 -= adcValues1[index1];          // Soustraction de la valeur précédente du tableau
+    adcValues1[index1] = lastValue1;     // Stockage de la nouvelle valeur dans le tableau
+    sum1 += adcValues1[index1];          // Ajout de la nouvelle valeur à la somme
+    index1 = (index1 + UN) % DIX;        // Mise à jour de l'index pour le tableau
+    uint16_t averageValue1 = sum1 / DIX; // Calcul de la moyenne des valeurs du canal 1
 
-    // Calculer la valeur variant de 0 à 180
+    // Calcul de l'angle absolu variant de 0 à 180
     PWMData.absAngle = (averageValue1 * ANGLE_ABS) / MAXVALAD;
 
-    // Calculer l'angle signé variant de -90 à 90
+    // Calcul de l'angle signé variant de -90 à 90
     PWMData.AngleSetting = PWMData.absAngle - MAXANGLE;
 }
 
@@ -141,22 +146,23 @@ void GPWM_ExecPWM(S_pwmSettings *pData)
    
 } 
 
-// Execution PWM software
+// Fonction pour exécuter le PWM en mode logiciel
 void GPWM_ExecPWMSoft(S_pwmSettings *pData)
 {
-    static uint8_t pwmCounter = ZERO; // Compteur pour le PWM
-    // Vérifier si le compteur a atteint la période PWM
+    static uint8_t pwmCounter = ZERO; // Compteur pour suivre le cycle PWM
+
+    // Vérification si le compteur a atteint la période définie pour le PWM
     if (pwmCounter < PWM_PERIOD_CYCLES) {
-        // Comparer le compteur avec la valeur de absSpeed
+        // Comparaison du compteur avec la vitesse absolue
         if (pwmCounter < PWMData.absSpeed) {
-            BSP_LEDOn(BSP_LED_2);// Allumer LED2
+            BSP_LEDOn(BSP_LED_2); // Allumer la LED2 si le compteur est inférieur à la vitesse
         } else {
-            BSP_LEDOff(BSP_LED_2);// Éteindre LED2
+            BSP_LEDOff(BSP_LED_2); // Éteindre la LED2 sinon
         }
-        // Incrémenter le compteur
+        // Incrémentation du compteur pour le prochain cycle
         pwmCounter++;
     } else {
-        // Réinitialiser le compteur à la fin de la période
+        // Réinitialisation du compteur à zéro à la fin de la période PWM
         pwmCounter = ZERO;
     }
 }

@@ -99,13 +99,15 @@ void __ISR(_TIMER_1_VECTOR, ipl4AUTO) IntHandlerDrvTmrInstance0(void)
 }
 void __ISR(_TIMER_2_VECTOR, ipl1AUTO) IntHandlerDrvTmrInstance1(void)
 {
+    //    BSP_LEDOff(BSP_LED_3);
     PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_2);
-//    BSP_LEDOff(BSP_LED_1);
+    //    BSP_LEDOn(BSP_LED_3);
 }  
 void __ISR(_TIMER_3_VECTOR, ipl1AUTO) IntHandlerDrvTmrInstance2(void)
 {
+    //    BSP_LEDOff(BSP_LED_4);
     PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_3);
-//    BSP_LEDOff(BSP_LED_2);
+    //    BSP_LEDOn(BSP_LED_4);
 }
 void __ISR(_TIMER_4_VECTOR, ipl7AUTO) IntHandlerDrvTmrInstance3(void)
 {

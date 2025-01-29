@@ -194,6 +194,7 @@ void APP_Initialize ( void );
  */
 
 void APP_Tasks( void );
+//pour gestion état app.Data
 void APP_UpdateState(APP_STATES NewState);
 
 #endif /* _APP_H */

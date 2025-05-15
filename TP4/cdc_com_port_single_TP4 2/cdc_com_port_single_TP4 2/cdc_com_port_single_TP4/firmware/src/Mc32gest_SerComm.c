@@ -12,8 +12,8 @@
 // Fonction de réception d'un message
 // Met à jour les paramètres du générateur à partir du message reçu
 // Format du message attendu :
-// !S=TF=2000A=10000O=+5000D=100W=0#
-// !S=PF=2000A=10000O=-5000D=100W=1#
+// !S=TF=0200A=10000O=+5000W=0#
+// !S=PF=200A=10000O=-5000W=1#
 
 // *****************************************************************************
 // Fonction :
@@ -59,7 +59,7 @@ bool GetMessage(int8_t *USBReadBuffer, S_ParamGen *pParam, bool *SaveTodo) {
     if (USBReadBuffer[0] == '!') // On peut remplacer '!' par une constante définie
     {
         // Identification de la forme du signal
-        switch (pt_Forme[2]) // On pourrait remplacer le décalage 2 par une constante
+        switch (pt_Forme[2])
         {
             case 'T':
                 pParam->Forme = Triangle;
@@ -84,8 +84,8 @@ bool GetMessage(int8_t *USBReadBuffer, S_ParamGen *pParam, bool *SaveTodo) {
         *SaveTodo = atoi(pt_Sauvegarde + 2); // Décalage de 2 pour ignorer 'W='
 
         // Si la sauvegarde est demandée, écrire les paramètres dans la EEPROM
-        if (*SaveTodo == true) {
-            I2C_WriteSEEPROM((uint32_t*) pParam, 0x00, sizeof (S_ParamGen));
+        if (*SaveTodo) {
+            I2C_WriteSEEPROM((uint32_t*) pParam, MCP79411_EEPROM_BEG , sizeof (S_ParamGen));
         }
 
         return true; //La lecture a aboutie  
@@ -97,8 +97,8 @@ bool GetMessage(int8_t *USBReadBuffer, S_ParamGen *pParam, bool *SaveTodo) {
 // Fonction d'envoi d'un message
 // Remplit le tampon d'émission pour USB en fonction des paramètres du générateur
 // Format du message envoyé :
-// !S=TF=2000A=10000O=+5000D=25WP=0#
-// !S=TF=2000A=10000O=+5000D=25WP=1# (ack de sauvegarde)
+// !S=TF=2000A=10000O=+5000WP=0#
+// !S=TF=2000A=10000O=+5000WP=1# (ack de sauvegarde)
 
 // *****************************************************************************
 // Fonction :

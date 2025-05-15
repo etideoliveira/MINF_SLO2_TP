@@ -65,8 +65,8 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // *****************************************************************************
 
 bool etatUSB = false;
-extern bool usbStatSave = true;
-extern bool FLAG_LCD = true;
+bool usbStatSave = false;
+bool FLAG_LCD = false;
 
 S_ParamGen RemoteParamGen;
 
@@ -525,7 +525,7 @@ void APP_Tasks(void) {
             appData.isWriteComplete = false;
             appData.state = APP_STATE_WAIT_FOR_WRITE_COMPLETE;
 
-            //envoie de la string reçue à l'autre APP
+            //envoie le string reçue à l'autre APP
 
             APP_GEN_SaveNewStr(appData.readBuffer, appData.numBytesRead);
 

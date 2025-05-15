@@ -61,7 +61,6 @@ void MENU_Execute(S_ParamGen *pParam, bool local) {
     static bool firstTimeIn = 1; // Indicateur pour l'initialisation
     static int8_t isSaved = NOSAVEMODE; //Variable déterminant si l'utilisateur est en train d'enregistrer les valeurs ou non
 
-
     if (local) {
         // Initialisation de l'affichage
         // Efface l'écran LCD la première fois
@@ -422,20 +421,15 @@ void MENU_Execute(S_ParamGen *pParam, bool local) {
 }
 
 /**
- * Function name :MENU_SaveValues
- * @author Vitor & Etienne
- * @date 21.03.2025
- *
- * @brief Enregistre les valeurs des paramètres dans la mémoire non volatile (NVM) après confirmation de l'utilisateur.
- * 
+ *  MENU_SaveValues
  * Cette fonction enregistre les valeurs des paramètres dans la NVM lorsque l'utilisateur confirme l'action en appuyant 
  * sur un bouton spécifique pendant une certaine durée. Elle fournit un retour visuel sur un écran (LCD) pour les 
  * opérations de sauvegarde réussies ou annulées.
+ * Paramètres :
+ *  pParam Pointeur vers la structure S_ParamGen contenant les valeurs des paramètres.
+ *  saveValuesMenuCounter Compteur pour naviguer dans le menu des valeurs à sauvegarder.
  * 
- * @param  pParam Pointeur vers la structure S_ParamGen contenant les valeurs des paramètres.
- * @param  saveValuesMenuCounter Compteur pour naviguer dans le menu des valeurs à sauvegarder.
- * 
- * @return État du mode de sauvegarde (SAVEMODE si en mode de sauvegarde, NOSAVEMODE sinon).
+ *  État du mode de sauvegarde (SAVEMODE si en mode de sauvegarde, NOSAVEMODE sinon).
  */
 
 int8_t MENU_SaveValues(S_ParamGen *pParam) {
@@ -491,8 +485,7 @@ int8_t MENU_SaveValues(S_ParamGen *pParam) {
         //Retour de l'état de l'état de la sauvegarde
         return (SAVEMODE);
     } else {
-        //Effacement de la ligne affichant si la valeur a été sauvegardée ou non
-        //lcd_ClearLine(2);
+       
         //Remise à zéro du compteur de l'affichage de la sauvagarde
         saveDisplayCounter = 0;
         //Remise à zéro du mode de la sauvegarde

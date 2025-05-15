@@ -143,7 +143,7 @@ void APP_GEN_Initialize(void) {
  */
 
 void APP_GEN_Tasks(void) {
-
+ 
     /* Check the application's current state. */
     switch (app_genData.state) {
             /* Application's initial state. */
@@ -190,7 +190,7 @@ void APP_GEN_Tasks(void) {
 
             //Test si l'USB est branché
             if (etatUSB) {
-                if (app_genData.strRxReceived == true) //Si une trame est reçu, allumer le back light
+                if (app_genData.strRxReceived) //Si une trame est reçu, allumer le back light
                 {
                     lcd_bl_on();
                 } else if (Pec12.InactivityDuration >= INACTIVITYDURATIONMAX) //Si le Pec12 n'est pas touché pendant 5 secondes, éteindre le back light
@@ -270,7 +270,7 @@ void APP_GEN_SaveNewStr(uint8_t* str, uint8_t strLen) {
     if (strLen > 31)
         strLen = 31;
 
-    // Copie la chaîne dans le buffer `app_genData.strRx`
+    // Copie la chaîne dans le buffer `app_genData.strRx` depuis str pour n caracteres.
     memcpy(app_genData.strRx, str, strLen);
 
     // Termine la chaîne par un caractère nul ('\0')
@@ -324,7 +324,7 @@ void APP_Gen_UpdateState(APP_GEN_STATES NewState) {
 void MENU_DemandeSave(void) {
     static bool compteurPremierPassage = true; // Indique si c'est le premier passage dans la fonction
     static uint8_t comptAffichageSauvegarde = 0; // Compteur pour l'affichage du message de sauvegarde
-    
+
     if (compteurPremierPassage) {
         LCD_ClearScreen();
         compteurPremierPassage = false; // Marque la fin du premier passage
@@ -339,6 +339,7 @@ void MENU_DemandeSave(void) {
         usbStatSave = false;
     }
 }
+
 //clear LCD
 
 void LCD_ClearScreen() {

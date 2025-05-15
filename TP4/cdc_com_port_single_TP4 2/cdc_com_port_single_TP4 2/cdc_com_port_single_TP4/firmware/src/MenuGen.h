@@ -11,6 +11,7 @@
 #include <stdint.h>
 #include "DefMenuGen.h"
 #include "Mc32Debounce.h"
+
 #define FREQU_MAX 2000  // Fréwuence maximum
 #define FREQU_MIN 20    // Fréquence minimum
 #define AMPL_MAX 10000  // Amplitude maximum

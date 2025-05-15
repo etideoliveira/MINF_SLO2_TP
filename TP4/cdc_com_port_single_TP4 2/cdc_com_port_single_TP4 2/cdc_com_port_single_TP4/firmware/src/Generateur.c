@@ -106,7 +106,7 @@ void GENSIG_UpdateSignal(S_ParamGen *pParam) {
                 }
                 break;
             case DentDeScie: // Cas du signal dent de scie
-                valBrute = MOITIE_AMPLITUDE + (offset + ((nbEchantillon - MOITIE_ECH) * amplitude_en_mV));
+                valBrute = MOITIE_AMPLITUDE + (offset - ((nbEchantillon - MOITIE_ECH) * amplitude_en_mV));
                 break;
             case Carre: // Cas du signal carré
                 if ((MAX_ECH / DEUX) > nbEchantillon) {

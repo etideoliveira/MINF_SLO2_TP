@@ -81,6 +81,7 @@
                 <sourceRootElem>..\src\system_config\pic32wk_sk_poll_sta</sourceRootElem>
                 <sourceRootElem>../../../../../MINF/TP/TP4 MINF/firmware/src</sourceRootElem>
                 <sourceRootElem>../../../../..</sourceRootElem>
+                <sourceRootElem>../../../../../..</sourceRootElem>
             </sourceRootList>
             <confList>
                 <confElem>

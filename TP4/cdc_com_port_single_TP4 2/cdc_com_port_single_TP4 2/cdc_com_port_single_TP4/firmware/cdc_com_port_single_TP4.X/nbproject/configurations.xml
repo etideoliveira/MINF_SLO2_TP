@@ -351,6 +351,7 @@
     <Elem>..\src\system_config\pic32wk_sk_poll_sta</Elem>
     <Elem>../../../../../MINF/TP/TP4 MINF/firmware/src</Elem>
     <Elem>../../../../..</Elem>
+    <Elem>../../../../../..</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
